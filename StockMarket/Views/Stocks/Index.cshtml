@@ -1,0 +1,92 @@
+﻿@model IEnumerable<StockMarket.Models.Stock>
+
+@{
+
+    ViewData["Title"] = "Index";
+
+}
+
+<h1>Stocks Dashboard</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Stock</a>
+</p>
+<div  style="float:right">
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Stock Code.." title="Type in a name">
+
+</div>
+<table class="table" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                Stock Code
+            </th>
+            <th>
+                Last Price
+            </th>
+            <th>
+                Last Modified
+            </th>
+            <th>
+                CreationDate
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastPrice)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastModified)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreationDate)
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.StockId" class="btn btn-outline-primary">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.StockId" class="btn btn-outline-info">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.StockId" class="btn btn-outline-danger">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    setTimeout(function () {
+        window.location.reload();
+    }, 5000);
+    $(document).ready(function () {
+
+        setTimeout(function () {
+            window.location.reload();
+        }, 5000);
+    });
+</script>
+

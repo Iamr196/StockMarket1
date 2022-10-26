@@ -1,0 +1,66 @@
+﻿@model StockMarket.Models.Stock
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Stock (@Model.StockCode)</h4>
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <label class="control-label"> Stock Code</label>
+                <input asp-for="StockCode" class="form-control" readonly />
+                <span asp-validation-for="StockCode" class="text-danger"></span>
+            </div>
+            <div class="col">
+                <label class="control-label">Last Price</label>
+                <input asp-for="LastPrice" class="form-control" readonly />
+                <span asp-validation-for="LastPrice" class="text-danger"></span>
+            </div>
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <label class="control-label"> Last Modified</label>
+                <input asp-for="LastModified" class="form-control" readonly />
+                <span asp-validation-for="LastModified" class="text-danger"></span>
+            </div>
+            <div class="col">
+                <label class="control-label">Creation Date</label>
+                <input asp-for="CreationDate" class="form-control" readonly />
+                <span asp-validation-for="CreationDate" class="text-danger"></span>
+            </div>
+
+        </div>
+    </div>
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StockCode)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StockCode)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LastPrice)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LastPrice)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.StockId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
