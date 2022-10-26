@@ -60,7 +60,8 @@ namespace StockMarket.Controllers
         {
             if (ModelState.IsValid)
             {
-                stock.CreationDate= DateTime.Now;
+               stock.CreationDate= DateTime.Now;
+                stock.LastModified= DateTime.Now;
                 _context.Add(stock);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -98,6 +99,8 @@ namespace StockMarket.Controllers
             {
                 try
                 {
+                 var temp = _context.Stocks.Where(x => x.StockId == id).AsNoTracking().FirstOrDefault();
+                    stock.CreationDate = temp.CreationDate;
                     stock.LastModified= DateTime.Now;
                     _context.Update(stock);
                     await _context.SaveChangesAsync();
