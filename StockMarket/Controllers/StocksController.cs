@@ -22,7 +22,15 @@ namespace StockMarket.Controllers
         
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Stocks.ToListAsync());
+               var x = await _context.Stocks.ToListAsync();
+            Random random = new Random();
+            int randomNumber1 = random.Next(0, 300);
+            foreach (var item in x)
+            {
+                item.LastPrice = randomNumber1;
+            }
+
+            return View(x);
         }
         [HttpGet]
         public IActionResult GetStocks()
